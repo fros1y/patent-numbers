@@ -1,0 +1,60 @@
+cabal-version:       2.4
+name:                patent-numbers
+version:             0.0.0.0
+synopsis:            Parse and store patent publication reference numbers
+description:         Parse and store patent publication reference numbers
+homepage:            https://github.com/fros1y/patent-numbers
+bug-reports:         https://github.com/fros1y/patent-numbers/issues
+license:             Apache-2.0
+license-file:        LICENSE
+author:              Martin Galese
+maintainer:          Martin Galese <martin@patentmark.ai>
+copyright:           2020 Martin Galese
+category:            Data
+build-type:          Simple
+extra-doc-files:     README.md
+                     CHANGELOG.md
+tested-with:         GHC == 8.8.3
+
+source-repository head
+  type:                git
+  location:            https://github.com/fros1y/patent-numbers.git
+
+common common-options
+  build-depends:       base ^>= 4.13.0.0
+                     , relude
+  
+  mixins:              base hiding (Prelude)
+                     , relude (Relude as Prelude)
+  
+  ghc-options:         -Wall
+                       -Wcompat
+                       -Widentities
+                       -Wincomplete-uni-patterns
+                       -Wincomplete-record-updates
+  if impl(ghc >= 8.0)
+    ghc-options:       -Wredundant-constraints
+  if impl(ghc >= 8.2)
+    ghc-options:       -fhide-source-paths
+  if impl(ghc >= 8.4)
+    ghc-options:       -Wmissing-export-lists
+                       -Wpartial-fields
+  if impl(ghc >= 8.8)
+    ghc-options:       -Wmissing-deriving-strategies
+
+  default-language:    Haskell2010
+
+library
+  import:              common-options
+  hs-source-dirs:      src
+  exposed-modules:     PatentNumbers
+
+test-suite patent-numbers-test
+  import:              common-options
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       patent-numbers
+  ghc-options:         -threaded
+                       -rtsopts
+                       -with-rtsopts=-N
