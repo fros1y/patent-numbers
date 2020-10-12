@@ -1,60 +1,60 @@
-cabal-version:       2.4
-name:                patent-numbers
-version:             0.0.0.0
-synopsis:            Parse and store patent publication reference numbers
-description:         Parse and store patent publication reference numbers
-homepage:            https://github.com/fros1y/patent-numbers
-bug-reports:         https://github.com/fros1y/patent-numbers/issues
-license:             Apache-2.0
-license-file:        LICENSE
-author:              Martin Galese
-maintainer:          Martin Galese <martin@patentmark.ai>
-copyright:           2020 Martin Galese
-category:            Data
-build-type:          Simple
-extra-doc-files:     README.md
-                     CHANGELOG.md
-tested-with:         GHC == 8.8.3
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.33.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 81da3a83c6b8d90a51fdfa1b4d96d7b89fcab45e7cde3d8bae8562036b00b8fb
+
+name:           patent-numbers
+version:        0.1.0.0
+category:       Data
+homepage:       https://github.com/fros1y/patent-numbers#readme
+bug-reports:    https://github.com/fros1y/patent-numbers/issues
+author:         Martin Galese
+maintainer:     martin@patentmark.ai
+copyright:      Martin Gales
+license:        Apache-2.0
+build-type:     Simple
 
 source-repository head
-  type:                git
-  location:            https://github.com/fros1y/patent-numbers.git
-
-common common-options
-  build-depends:       base ^>= 4.13.0.0
-                     , relude
-  
-  mixins:              base hiding (Prelude)
-                     , relude (Relude as Prelude)
-  
-  ghc-options:         -Wall
-                       -Wcompat
-                       -Widentities
-                       -Wincomplete-uni-patterns
-                       -Wincomplete-record-updates
-  if impl(ghc >= 8.0)
-    ghc-options:       -Wredundant-constraints
-  if impl(ghc >= 8.2)
-    ghc-options:       -fhide-source-paths
-  if impl(ghc >= 8.4)
-    ghc-options:       -Wmissing-export-lists
-                       -Wpartial-fields
-  if impl(ghc >= 8.8)
-    ghc-options:       -Wmissing-deriving-strategies
-
-  default-language:    Haskell2010
+  type: git
+  location: https://github.com/fros1y/patent-numbers
 
 library
-  import:              common-options
-  hs-source-dirs:      src
-  exposed-modules:     PatentNumbers
+  exposed-modules:
+      Data.Patent.Number
+      Data.Patent.Number.Parser
+      Prelude
+  other-modules:
+      Paths_patent_numbers
+  hs-source-dirs:
+      src
+  default-extensions: NoImplicitPrelude DerivingVia DuplicateRecordFields TypeApplications FlexibleContexts DataKinds MultiParamTypeClasses TypeSynonymInstances FlexibleInstances NamedFieldPuns RecordWildCards BangPatterns BinaryLiterals ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFoldable DeriveFunctor DeriveGeneric DeriveTraversable DoAndIfThenElse EmptyDataDecls ExistentialQuantification FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving InstanceSigs KindSignatures LambdaCase MultiParamTypeClasses MultiWayIf NamedFieldPuns NoImplicitPrelude OverloadedStrings PartialTypeSignatures PatternGuards PolyKinds RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TupleSections TypeFamilies TypeSynonymInstances ViewPatterns OverloadedLabels
+  ghc-options: -Wall -Widentities -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints -fhide-source-paths -Wmissing-export-lists -Wpartial-fields -Wmissing-deriving-strategies
+  build-depends:
+      base-noprelude >=4.11 && <10
+    , lens
+    , parsec
+    , relude
+  default-language: Haskell2010
 
 test-suite patent-numbers-test
-  import:              common-options
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  build-depends:       patent-numbers
-  ghc-options:         -threaded
-                       -rtsopts
-                       -with-rtsopts=-N
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      NumberSpec
+      ParserSpec
+      Paths_patent_numbers
+  hs-source-dirs:
+      test
+  default-extensions: NoImplicitPrelude DerivingVia DuplicateRecordFields TypeApplications FlexibleContexts DataKinds MultiParamTypeClasses TypeSynonymInstances FlexibleInstances NamedFieldPuns RecordWildCards BangPatterns BinaryLiterals ConstraintKinds DataKinds DefaultSignatures DeriveDataTypeable DeriveFoldable DeriveFunctor DeriveGeneric DeriveTraversable DoAndIfThenElse EmptyDataDecls ExistentialQuantification FlexibleContexts FlexibleInstances FunctionalDependencies GADTs GeneralizedNewtypeDeriving InstanceSigs KindSignatures LambdaCase MultiParamTypeClasses MultiWayIf NamedFieldPuns NoImplicitPrelude OverloadedStrings PartialTypeSignatures PatternGuards PolyKinds RankNTypes RecordWildCards ScopedTypeVariables StandaloneDeriving TupleSections TypeFamilies TypeSynonymInstances ViewPatterns OverloadedLabels
+  ghc-options: -Wall -Widentities -Wincomplete-uni-patterns -Wincomplete-record-updates -Wredundant-constraints -fhide-source-paths -Wmissing-export-lists -Wpartial-fields -Wmissing-deriving-strategies -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base-noprelude >=4.11 && <10
+    , hspec
+    , lens
+    , parsec
+    , patent-numbers
+    , relude
+  default-language: Haskell2010
